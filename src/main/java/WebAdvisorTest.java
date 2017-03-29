@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 
 
 public class WebAdvisorTest {
-	private WebDriver driver;
+	public WebDriver driver;
 		
 	public static void main(String[] args) {
         JUnitCore.main("WebAdvisorTest");  
@@ -22,7 +22,7 @@ public class WebAdvisorTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		//System.setProperty("webdriver.gecko.driver", "C:/Users/OwenLi/workspace/Library/geckodriver-v0.15.0-win64/geckodriver.exe");
+
 		ChromeOptions options = new ChromeOptions ();
 		options.addExtensions (new File("C:/Users/OwenLi/workspace/Library/WebAdvisor_v5.0.532.0.crx"));
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
@@ -55,17 +55,19 @@ public class WebAdvisorTest {
 	@Test
 	public void given_PhishingSite_RiskyMessageDisplayed_And_RedirectToPhishingPage() throws Exception {
 		driver.get("http://www.masinovodje.com/inc/New/");
-		  WebElement spanRisky =driver.findElement(By.xpath("//span[contains(text(),'Whoa, that page could be risky')]"));
-		  Assert.assertNotNull(spanRisky);
+		Thread.sleep(2000);
+		WebElement spanRisky =driver.findElement(By.xpath("//span[contains(text(),'Whoa, that page could be risky')]"));
+		Assert.assertNotNull(spanRisky);
 		  
-		  String URL = driver.getCurrentUrl();
-		  Assert.assertThat(URL, containsString("http://www.siteadvisor.com/phishing.html?"));
+		String URL = driver.getCurrentUrl();
+		Assert.assertThat(URL, containsString("http://www.siteadvisor.com/phishing.html?"));
 		  
 	}
   
 	@Test
 	public void given_RestrictedSite_RiskyMessageDisplayed_And_RedirectToRestrictedPage() throws Exception {
 		driver.get("http://aadroid.net/sys.olk");
+		Thread.sleep(2000);
 		WebElement spanRisky =driver.findElement(By.xpath("//span[contains(text(),'Whoa, that page could be risky')]"));
 		Assert.assertNotNull(spanRisky);
 		  
@@ -75,6 +77,6 @@ public class WebAdvisorTest {
 	  
 	@After
 	public void tearDown() throws Exception {
-		driver.quit();
+		//driver.quit();
 	}
 }
