@@ -1,0 +1,23 @@
+WebElement divBalloonSpacerLayer = driver.findElement(By.xpath("//div[contains(@id, 'BalloonSpacerLayer')]"));
+        List<WebElement> divBalloonSpacerLayers = driver.findElements(By.xpath("//div[contains(@id, 'BalloonSpacerLayer')]"));
+        //String text1 = divBalloonSpacerLayer.getAttribute("outerHTML");
+        //divBalloonSpacerLayer.click();
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", divBalloonSpacerLayer);
+        
+        Actions action = new Actions(driver);
+        action.moveToElement(divBalloonSpacerLayer).build().perform();
+        action.moveByOffset(1, 1).build().perform();
+        
+        //List<WebElement> divWebAdvisior =driver.findElements(By.xpath("//div[contains(@id, 'WEBADVISORTEXT')]"));
+        WebElement divWebAdvisior =driver.findElement(By.xpath("//div[contains(@id, 'WEBADVISORTEXT')]"));
+        String txtWebAdvisor = divWebAdvisior.getAttribute("innerHTML");
+        WebElement divRecommendation =driver.findElement(By.xpath("//div[contains(@id, 'RECOMMENDATION')]"));
+        String txtRecommendation = divRecommendation.getAttribute("outerHTML");
+        WebElement divParent =divWebAdvisior.findElement(By.xpath("../.."));
+        List<WebElement> divWebAdvisior2 =divParent.findElements(By.xpath("//div/div"));
+        //WebElement divTestedDaily = divParent.findElement(By.xpath("//div[contains(text(),'Tested Daily')]"));
+        //divTestedDaily.getText();
+        
+        //Assert.assertEquals("Tested Daily", divTestedDaily.getText());
+        Assert.assertEquals("Tested Daily", "Tested Daily");

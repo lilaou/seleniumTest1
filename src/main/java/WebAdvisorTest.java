@@ -47,14 +47,15 @@ public class WebAdvisorTest {
         
         WebElement divWebAdvisior =driver.findElement(By.xpath("//div[contains(text(),'McAfee WebAdvisor')]"));
         WebElement divTestedDaily = divWebAdvisior.findElement(By.xpath("//div[contains(text(),'Tested Daily')]"));
-        divTestedDaily.getText();
         
+        Assert.assertNotNull(divWebAdvisior);
+        Assert.assertNotNull(divTestedDaily);
         Assert.assertEquals("Tested Daily", divTestedDaily.getText());
 	}
   
 	@Test
 	public void given_PhishingSite_RiskyMessageDisplayed_And_RedirectToPhishingPage() throws Exception {
-		driver.get("http://www.masinovodje.com/inc/New/");
+		driver.get("http://www.masinovodje.com/");
 		Thread.sleep(2000);
 		WebElement spanRisky =driver.findElement(By.xpath("//span[contains(text(),'Whoa, that page could be risky')]"));
 		Assert.assertNotNull(spanRisky);
@@ -77,6 +78,6 @@ public class WebAdvisorTest {
 	  
 	@After
 	public void tearDown() throws Exception {
-		//driver.quit();
+		driver.quit();
 	}
 }

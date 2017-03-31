@@ -9,10 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
 
 public class WebAdvisorTest_Firefox extends WebAdvisorTest {
 	
@@ -35,14 +37,14 @@ public class WebAdvisorTest_Firefox extends WebAdvisorTest {
         Thread.sleep(1000);
         //Click Search button
         driver.findElement(By.name("btnG")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         
-        List<WebElement> divWebAdvisior =driver.findElements(By.xpath("//div[contains(text(),'McAfee WebAdvisor')]"));
-        //WebElement divTestedDaily = divWebAdvisior.findElement(By.xpath("//div[contains(text(),'Tested Daily')]"));
-        //divTestedDaily.getText();
+        WebElement divWebAdvisior =driver.findElement(By.xpath("//div[contains(@id, 'WEBADVISORTEXT')]"));
+        WebElement divRecommendation =driver.findElement(By.xpath("//div[contains(@id, 'RECOMMENDATION')]"));
         
-        //Assert.assertEquals("Tested Daily", divTestedDaily.getText());
-        Assert.assertEquals("Tested Daily", "Tested Daily");
+        Assert.assertNotNull(divWebAdvisior);
+        Assert.assertNotNull(divRecommendation);
+        
 	}
 
 }
